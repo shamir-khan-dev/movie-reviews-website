@@ -1,8 +1,16 @@
+/* ============================================ */
+/* REVIEWS CONTROLLER */
+/* Handles incoming requests and talks to the DAO */
+/* ============================================ */
+
 import ReviewsDAO from "../dao/reviewsDAO.js"
 
 export default class ReviewsController {
+
+    // Get all reviews for a movie
     static async apiGetReviews(req, res, next) {
         try {
+            // Get query parameters or use defaults
             let moviesPerPage = req.query.moviesPerPage ? parseInt(req.query.moviesPerPage, 10) : 20
             let page = req.query.page ? parseInt(req.query.page, 10) : 0
 
@@ -11,24 +19,27 @@ export default class ReviewsController {
                 filters.movieId = req.params.id
             }
 
+            // Call DAO to get reviews
             let reviews = await ReviewsDAO.getReviews({
                 filters,
                 page,
                 reviewsPerPage: moviesPerPage,
             })
-            res.json(reviews)
+            res.json(reviews) // Send response
         } catch (e) {
             console.log(`api, ${e}`)
             res.status(500).json({ error: e })
         }
     }
 
+    // Post (create) a new review
     static async apiPostReview(req, res, next) {
         try {
             const movieId = req.body.movieId
             const review = req.body.review
             const user = req.body.user
 
+            // Call DAO to add review
             const reviewResponse = await ReviewsDAO.addReview(
                 movieId,
                 user,
@@ -40,6 +51,7 @@ export default class ReviewsController {
         }
     }
 
+    // Get a single specific review by ID
     static async apiGetReview(req, res, next) {
         try {
             let id = req.params.id || {}
@@ -55,6 +67,7 @@ export default class ReviewsController {
         }
     }
 
+    // Update an existing review
     static async apiUpdateReview(req, res, next) {
         try {
             const reviewId = req.params.id
@@ -84,6 +97,7 @@ export default class ReviewsController {
         }
     }
 
+    // Delete a review
     static async apiDeleteReview(req, res, next) {
         try {
             const reviewId = req.params.id

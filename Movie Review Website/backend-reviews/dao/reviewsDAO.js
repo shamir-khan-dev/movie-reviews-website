@@ -1,9 +1,15 @@
+/* ============================================ */
+/* REVIEWS DATA ACCESS OBJECT (DAO) */
+/* Handles direct communication with MongoDB */
+/* ============================================ */
+
 import mongodb from "mongodb"
 const ObjectId = mongodb.ObjectId
 
-let reviews
+let reviews // Will store the database collection
 
 export default class ReviewsDAO {
+    // Initial connection to the database
     static async injectDB(conn) {
         if (reviews) {
             return
@@ -15,6 +21,7 @@ export default class ReviewsDAO {
         }
     }
 
+    // Add a new review to the database
     static async addReview(movieId, user, review) {
         try {
             const reviewDoc = {
@@ -29,6 +36,7 @@ export default class ReviewsDAO {
         }
     }
 
+    // Get a specific review by ID
     static async getReview(reviewId) {
         try {
             return await reviews.findOne({ _id: new ObjectId(reviewId) })
@@ -38,6 +46,7 @@ export default class ReviewsDAO {
         }
     }
 
+    // Update an existing review
     static async updateReview(reviewId, user, review) {
         try {
             const updateResponse = await reviews.updateOne(
@@ -52,6 +61,7 @@ export default class ReviewsDAO {
         }
     }
 
+    // Delete a review
     static async deleteReview(reviewId, user) {
         try {
             const deleteResponse = await reviews.deleteOne({
@@ -66,7 +76,7 @@ export default class ReviewsDAO {
         }
     }
 
-    // Default getReviews to support getting By Movie ID
+    // Get a list of reviews (supports filtering by Movie ID)
     static async getReviews({
         filters = null,
         page = 0,

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Head section contains metadata and links to styles/fonts -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,37 +11,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Link to our custom CSS file -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Top Navigation Bar -->
     <div class="topnav">
         <a class="active" href="#">Movies Reviews Site</a>
+
+        <!-- Search Bar Container -->
         <div class="searchContainer">
             <form role="search" id="form">
                 <input type="search" id="query" name="q" placeholder="Search...">
             </form>
-
         </div>
-
     </div>
 
+    <!-- Padding to separate content from fixed navbar -->
     <div style="padding-left:16px"></div>
 
+    <!-- Main Section where movies will be displayed -->
     <section id="section">
-        <!--    <div class="row">
-            <div class="column">
-                <div class="card">
-                    <center><img src="acc43d66-2773-437d-a9ce-72aeb63cbbae.jpg" class="thumbnail"></center>
-                    <h3>Movie Title</h3>
-                </div>
-            </div>
-        </div> -->
-
+        <!-- Movies will be inserted here by JavaScript -->
     </section>
 
 </body>
 
+<!-- Link to our custom JavaScript file -->
 <script src="script.js"></script>
 
 </html>
