@@ -146,6 +146,13 @@ input {
     width: 100%;
 }
 
+input[type="text"],
+input[type="search"],
+textarea {
+    display: block;
+    box-sizing: border-box;
+}
+
 input::placeholder {
     color: var(--muted-soft);
 }
@@ -205,6 +212,7 @@ input::placeholder {
 
 /* --- Review Inputs within Cards --- */
 .card input[type="text"] {
+    display: block;
     background-color: transparent;
     border: none;
     border-bottom: 1px solid var(--hairline-strong);
@@ -214,6 +222,7 @@ input::placeholder {
     width: 100%;
     margin-top: 5px;
     font-family: var(--font-body);
+    font-size: 16px;
     transition: border-color 0.2s ease;
     box-sizing: border-box;
 }
@@ -322,6 +331,7 @@ input::placeholder {
 }
 
 .form-group textarea {
+    display: block;
     background-color: transparent;
     border: none;
     border-bottom: 1px solid var(--hairline-strong);
