@@ -28,7 +28,7 @@ body {
     background: var(--bg-gradient);
     background-attachment: fixed;
     /* Keeps the background still while you scroll */
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Outfit', 'Roboto', sans-serif;
     color: var(--text-color);
     margin: 0;
     /* Remove default browser margin */
@@ -130,7 +130,7 @@ form:focus-within {
 input {
     all: unset;
     /* Resets all default browser styles */
-    font: 16px 'Roboto', sans-serif;
+    font: 16px 'Outfit', 'Roboto', sans-serif;
     color: white;
     height: 100%;
     width: 100%;
@@ -405,4 +405,29 @@ input::placeholder {
     border-color: var(--primary-color);
     color: var(--primary-color);
     background-color: rgba(0, 210, 255, 0.1);
+}
+
+/* --- Hero Header & SEO styling --- */
+.hero-header {
+    text-align: center;
+    padding: 60px 20px 20px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-header h1 {
+    font-size: 3.2rem;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    font-weight: 700;
+}
+
+.hero-header p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0;
+    line-height: 1.6;
 }
