@@ -26,13 +26,14 @@ export default class ReviewsDAO {
     }
 
     /* --- Add a Review (Insert) --- */
-    static async addReview(movieId, user, review) {
+    static async addReview(movieId, user, review, rating) {
         try {
             // Create a JavaScript object (a document) to store in MongoDB
             const reviewDoc = {
                 movieId: movieId,
                 user: user,
                 review: review,
+                rating: parseInt(rating, 10) || 5, // Default to 5 if not provided
             }
             // insertOne is a MongoDB command to add one document to the collection
             return await reviews.insertOne(reviewDoc)
@@ -55,14 +56,18 @@ export default class ReviewsDAO {
     }
 
     /* --- Update a Review --- */
-    static async updateReview(reviewId, user, review) {
+    static async updateReview(reviewId, user, review, rating) {
         try {
             // updateOne finds a document and changes specific fields.
             // First argument: The filter { _id: ..., user: ... }. Both must match!
             // Second argument: The update operation. $set is a MongoDB operator to update only specific fields.
+            const updateDoc = { review: review }
+            if (rating !== undefined) {
+                updateDoc.rating = parseInt(rating, 10) || 5
+            }
             const updateResponse = await reviews.updateOne(
                 { _id: new ObjectId(reviewId), user: user },
-                { $set: { review: review } }
+                { $set: updateDoc }
             )
 
             return updateResponse

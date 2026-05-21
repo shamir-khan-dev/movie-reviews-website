@@ -29,15 +29,27 @@ div_new.innerHTML = `
             <textarea id="new_review" placeholder="Write your movie review here..." rows="3"></textarea>
           </div>
           <div class="form-group">
+            <label>Rating</label>
+            <div class="star-rating" id="new_star_container">
+              <span class="star" data-value="1">★</span>
+              <span class="star" data-value="2">★</span>
+              <span class="star" data-value="3">★</span>
+              <span class="star" data-value="4">★</span>
+              <span class="star" data-value="5">★</span>
+            </div>
+            <input type="hidden" id="new_rating" value="5">
+          </div>
+          <div class="form-group">
             <label for="new_user">Your Name</label>
             <input type="text" id="new_user" placeholder="Enter your name">
           </div>
-          <button class="btn btn-save" onclick="saveReview('new_review', 'new_user')">Submit Review</button>
+          <button class="btn btn-save" onclick="saveReview('new_review', 'new_user', '', 'new_rating')">Submit Review</button>
       </div>
     </div>
   </div>
 `;
 main.appendChild(div_new);
+initStars('new_star_container', 'new_rating');
 
 // Call our function to fetch existing reviews
 returnReviews(APILINK);
@@ -49,16 +61,21 @@ function returnReviews(url) {
     .then(function (data) {
       console.log(data);
       data.forEach(review => {
+        const ratingVal = parseInt(review.rating, 10) || 5;
+        const starDisplay = "★".repeat(ratingVal) + "☆".repeat(5 - ratingVal);
         const div_card = document.createElement('div');
         div_card.innerHTML = `
           <div class="row">
             <div class="column">
               <div class="card review-card" id="${review._id}">
-                <p class="review-header">👤 <strong class="review-user-val">${review.user}</strong></p>
+                <p class="review-header">
+                  👤 <strong class="review-user-val">${review.user}</strong>
+                  <span class="review-stars" data-rating="${ratingVal}">${starDisplay}</span>
+                </p>
                 <p class="review-body">"<span class="review-text-val">${review.review}</span>"</p>
                 <div class="review-actions">
                   <button class="btn-action btn-edit" onclick="editReview('${review._id}')">✏️ Edit</button>
-                  <button class="btn-action btn-delete" onclick="deleteReview('${review._id}')">🗑️ Delete</button>
+                  <button class="btn-action btn-delete" onclick="deleteReview('${review._id}', '${review.user}')">🗑️ Delete</button>
                 </div>
               </div>
             </div>
@@ -70,9 +87,10 @@ function returnReviews(url) {
 }
 
 /* --- Function to Save (Create or Update) a Review --- */
-function saveReview(reviewInputId, userInputId, id = "") {
+function saveReview(reviewInputId, userInputId, id = "", ratingInputId = "") {
   const review = document.getElementById(reviewInputId).value;
   const user = document.getElementById(userInputId).value;
+  const ratingVal = ratingInputId ? parseInt(document.getElementById(ratingInputId).value, 10) || 5 : 5;
 
   if (id) {
     fetch(APILINK + id, {
@@ -81,7 +99,7 @@ function saveReview(reviewInputId, userInputId, id = "") {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ "user": user, "review": review })
+      body: JSON.stringify({ "user": user, "review": review, "rating": ratingVal })
     }).then(res => res.json())
       .then(res => {
         console.log(res);
@@ -94,7 +112,7 @@ function saveReview(reviewInputId, userInputId, id = "") {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ "user": user, "review": review, "movieId": movieId })
+      body: JSON.stringify({ "user": user, "review": review, "movieId": movieId, "rating": ratingVal })
     }).then(res => res.json())
       .then(res => {
         console.log(res);
@@ -104,14 +122,14 @@ function saveReview(reviewInputId, userInputId, id = "") {
 }
 
 /* --- Function to Delete a Review --- */
-function deleteReview(id) {
+function deleteReview(id, user) {
   fetch(APILINK + id, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json, text/plain, */*',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ "user": "user" })
+    body: JSON.stringify({ "user": user })
   }).then(res => res.json())
     .then(res => {
       console.log(res);
@@ -124,12 +142,16 @@ function editReview(id) {
   const element = document.getElementById(id);
   const userSpan = element.querySelector('.review-user-val');
   const reviewSpan = element.querySelector('.review-text-val');
+  const starSpan = element.querySelector('.review-stars');
   
   const user = userSpan ? userSpan.innerText : "";
   const review = reviewSpan ? reviewSpan.innerText : "";
+  const currentRating = starSpan ? parseInt(starSpan.getAttribute('data-rating'), 10) || 5 : 5;
 
   const reviewInputId = "review" + id;
   const userInputId = "user" + id;
+  const ratingInputId = "rating" + id;
+  const starContainerId = "star_container" + id;
 
   element.innerHTML = `
     <h3>Edit Review</h3>
@@ -138,12 +160,74 @@ function editReview(id) {
       <textarea id="${reviewInputId}" rows="3" style="background-color: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 8px; padding: 12px; width: 100%; box-sizing: border-box; margin-top: 5px; font-family: inherit;">${review}</textarea>
     </div>
     <div class="form-group" style="text-align: left; margin-top: 10px;">
+      <label>Rating</label>
+      <div class="star-rating" id="${starContainerId}">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+      </div>
+      <input type="hidden" id="${ratingInputId}" value="${currentRating}">
+    </div>
+    <div class="form-group" style="text-align: left; margin-top: 10px;">
       <label for="${userInputId}">Your Name</label>
       <input type="text" id="${userInputId}" value="${user}" style="background-color: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 8px; padding: 12px; width: 100%; box-sizing: border-box; margin-top: 5px; font-family: inherit;">
     </div>
     <div class="edit-actions" style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
-      <button class="btn btn-save" onclick="saveReview('${reviewInputId}', '${userInputId}', '${id}')">💾 Save</button>
+      <button class="btn btn-save" onclick="saveReview('${reviewInputId}', '${userInputId}', '${id}', '${ratingInputId}')">💾 Save</button>
       <button class="btn btn-cancel" onclick="location.reload()" style="background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2);">✕ Cancel</button>
     </div>
   `;
+  initStars(starContainerId, ratingInputId);
+}
+
+/* --- Function to Initialize Star Rating Interactivity --- */
+function initStars(ratingContainerId, hiddenInputId) {
+  const container = document.getElementById(ratingContainerId);
+  const hiddenInput = document.getElementById(hiddenInputId);
+  if (!container || !hiddenInput) return;
+
+  const stars = container.querySelectorAll('.star');
+  
+  function updateStars(val) {
+    stars.forEach(star => {
+      const starVal = parseInt(star.getAttribute('data-value'), 10);
+      if (starVal <= val) {
+        star.classList.add('selected');
+      } else {
+        star.classList.remove('selected');
+      }
+    });
+  }
+
+  // Initial update
+  updateStars(parseInt(hiddenInput.value, 10));
+
+  stars.forEach(star => {
+    // Click handles permanent selection
+    star.addEventListener('click', () => {
+      const val = parseInt(star.getAttribute('data-value'), 10);
+      hiddenInput.value = val;
+      updateStars(val);
+    });
+
+    // Mouseover handles hover preview
+    star.addEventListener('mouseover', () => {
+      const val = parseInt(star.getAttribute('data-value'), 10);
+      stars.forEach(s => {
+        const sVal = parseInt(s.getAttribute('data-value'), 10);
+        if (sVal <= val) {
+          s.classList.add('hover');
+        } else {
+          s.classList.remove('hover');
+        }
+      });
+    });
+
+    // Mouseout removes hover preview
+    star.addEventListener('mouseout', () => {
+      stars.forEach(s => s.classList.remove('hover'));
+    });
+  });
 }

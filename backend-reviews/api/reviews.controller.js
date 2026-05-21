@@ -53,13 +53,15 @@ export default class ReviewsController {
             const movieId = req.body.movieId
             const review = req.body.review
             const user = req.body.user
+            const rating = req.body.rating
 
             // Call the DAO to add the review to the database.
             // We wait for it to finish.
             const reviewResponse = await ReviewsDAO.addReview(
                 movieId,
                 user,
-                review
+                review,
+                rating
             )
             // If successful, send a JSON object saying "success".
             res.json({ status: "success" })
@@ -96,13 +98,15 @@ export default class ReviewsController {
             const reviewId = req.params.id
             const review = req.body.review
             const user = req.body.user
+            const rating = req.body.rating
 
             // Call DAO to update. Note: We use reviewId AND user to ensure 
             // only the person who created the review can update it.
             const reviewResponse = await ReviewsDAO.updateReview(
                 reviewId,
                 user,
-                review
+                review,
+                rating
             )
 
             // Destructuring: Extract 'error' property from reviewResponse object

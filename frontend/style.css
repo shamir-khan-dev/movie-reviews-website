@@ -431,3 +431,39 @@ input::placeholder {
     margin-top: 0;
     line-height: 1.6;
 }
+
+/* --- Star Rating System --- */
+.star-rating {
+    display: inline-flex;
+    gap: 5px;
+    margin-top: 5px;
+    user-select: none;
+}
+
+.star {
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.star:hover {
+    transform: scale(1.2);
+}
+
+.star.selected {
+    color: #ffc107;
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+.star.hover {
+    color: #ffdb58;
+}
+
+.review-stars {
+    color: #ffc107;
+    text-shadow: 0 0 8px rgba(255, 193, 7, 0.3);
+    margin-left: 10px;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
