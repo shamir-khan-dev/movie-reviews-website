@@ -172,12 +172,12 @@ function editReview(id) {
   const starContainerId = "star_container" + id;
 
   element.innerHTML = `
-    <h3>Edit Review</h3>
-    <div class="form-group" style="text-align: left;">
+    <h3 style="margin-bottom: var(--spacing-md); border-bottom: 1px solid var(--hairline); padding-bottom: 12px;">Edit Review</h3>
+    <div class="form-group">
       <label for="${reviewInputId}">Review Description</label>
-      <textarea id="${reviewInputId}" rows="3" style="background-color: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 8px; padding: 12px; width: 100%; box-sizing: border-box; margin-top: 5px; font-family: inherit;">${review}</textarea>
+      <textarea id="${reviewInputId}" rows="3">${review}</textarea>
     </div>
-    <div class="form-group" style="text-align: left; margin-top: 10px;">
+    <div class="form-group">
       <label>Rating</label>
       <div class="star-rating" id="${starContainerId}">
         <span class="star" data-value="1">★</span>
@@ -188,13 +188,13 @@ function editReview(id) {
       </div>
       <input type="hidden" id="${ratingInputId}" value="${currentRating}">
     </div>
-    <div class="form-group" style="text-align: left; margin-top: 10px;">
+    <div class="form-group">
       <label for="${userInputId}">Your Name</label>
-      <input type="text" id="${userInputId}" value="${user}" style="background-color: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 8px; padding: 12px; width: 100%; box-sizing: border-box; margin-top: 5px; font-family: inherit;">
+      <input type="text" id="${userInputId}" value="${user}">
     </div>
-    <div class="edit-actions" style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
+    <div class="review-actions" style="margin-top: var(--spacing-lg);">
       <button class="btn btn-save" onclick="saveReview('${reviewInputId}', '${userInputId}', '${id}', '${ratingInputId}')">💾 Save</button>
-      <button class="btn btn-cancel" onclick="location.reload()" style="background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2);">✕ Cancel</button>
+      <button class="btn-action btn-cancel" onclick="location.reload()">✕ Cancel</button>
     </div>
   `;
   initStars(starContainerId, ratingInputId);
