@@ -100,11 +100,17 @@ function saveReview(reviewInputId, userInputId, id = "", ratingInputId = "") {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ "user": user, "review": review, "rating": ratingVal })
-    }).then(res => res.json())
-      .then(res => {
-        console.log(res);
+    }).then(async res => {
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.error || "Failed to update review. Ensure you are the original poster.");
+      } else {
         location.reload();
-      });
+      }
+    }).catch(err => {
+      console.error(err);
+      alert("Network error. Could not update review.");
+    });
   } else {
     fetch(APILINK + "new", {
       method: 'POST',
@@ -113,11 +119,17 @@ function saveReview(reviewInputId, userInputId, id = "", ratingInputId = "") {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ "user": user, "review": review, "movieId": movieId, "rating": ratingVal })
-    }).then(res => res.json())
-      .then(res => {
-        console.log(res);
+    }).then(async res => {
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.error || "Failed to submit review.");
+      } else {
         location.reload();
-      });
+      }
+    }).catch(err => {
+      console.error(err);
+      alert("Network error. Could not submit review.");
+    });
   }
 }
 
@@ -130,11 +142,17 @@ function deleteReview(id, user) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ "user": user })
-  }).then(res => res.json())
-    .then(res => {
-      console.log(res);
+  }).then(async res => {
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || "Failed to delete review. Ensure you are the original poster.");
+    } else {
       location.reload();
-    });
+    }
+  }).catch(err => {
+    console.error(err);
+    alert("Network error. Could not delete review.");
+  });
 }
 
 /* --- Function to Enable Editing Mode --- */

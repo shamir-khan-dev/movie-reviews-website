@@ -134,14 +134,25 @@ export default class ReviewsController {
         try {
             const reviewId = req.params.id
             const user = req.body.user
+            console.log(`[DELETE] Request to delete review ID: ${reviewId} by user: "${user}"`);
 
             // Call DAO to delete. Again, checking user for security.
             const reviewResponse = await ReviewsDAO.deleteReview(
                 reviewId,
                 user
             )
+            console.log(`[DELETE] DB Response:`, reviewResponse);
+
+            if (reviewResponse.deletedCount === 0) {
+                console.log(`[DELETE] Failed: No review matched ID ${reviewId} and user "${user}"`);
+                return res.status(400).json({ 
+                    error: "Could not delete review. Make sure you are the author." 
+                });
+            }
+
             res.json({ status: "success" })
         } catch (e) {
+            console.error(`[DELETE] Exception:`, e);
             res.status(500).json({ error: e.message })
         }
     }
