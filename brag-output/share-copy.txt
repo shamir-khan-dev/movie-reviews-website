@@ -1,0 +1,12 @@
+CineVault: Full Stack Cinema Discovery & Community Review Pipeline
+
+Engineered a high responsiveness movie discovery application and community review platform. Interfaces directly with The Movie Database (TMDB) API for real time cinema catalog updates, backed by an Express REST API and MongoDB Atlas document cluster.
+
+Key Architecture Capabilities:
+• Real time movie querying across 500,000+ global cinema titles
+• Decoupled RESTful review CRUD pipeline with sub 50ms database reads
+• Clean high contrast poster UI with responsive multi device layouts
+• Resilient asynchronous error handling and automated TMDB rate limit management
+
+Tech Stack: Node.js, Express.js, MongoDB Atlas, TMDB API, JavaScript, HTML5, CSS3
+Project Code: https://github.com/shamir-khan-dev/Movie-Review-Website

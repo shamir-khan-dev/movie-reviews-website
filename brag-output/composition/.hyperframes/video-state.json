@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "historyId": "6e5fc349-4a34-4c84-995b-f015b4f936dc",
+  "currentRevision": null,
+  "pendingChanges": false,
+  "files": {
+    "assets/music/bgm.mp3": {
+      "hash": "9e2d2bb59d7425e2077e82b1d611143308620d3d21466910d37f5455f0f156bd",
+      "content": "C:\\Users\\shami\\.cache\\hyperframes\\history\\6e5fc349-4a34-4c84-995b-f015b4f936dc\\blobs\\9e\\9e2d2bb59d7425e2077e82b1d611143308620d3d21466910d37f5455f0f156bd"
+    },
+    "hyperframes.json": {
+      "hash": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+      "content": "C:\\Users\\shami\\.cache\\hyperframes\\history\\6e5fc349-4a34-4c84-995b-f015b4f936dc\\blobs\\53\\53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
+    },
+    "index.html": {
+      "hash": "8bfe2d1e932c2a8c10b24cbb2b60da4e8ab2dbc78386c93e91aa654e8c834da5",
+      "content": "C:\\Users\\shami\\.cache\\hyperframes\\history\\6e5fc349-4a34-4c84-995b-f015b4f936dc\\blobs\\8b\\8bfe2d1e932c2a8c10b24cbb2b60da4e8ab2dbc78386c93e91aa654e8c834da5"
+    },
+    "package.json": {
+      "hash": "21f702001d533fa0ae096bdfff24b1060abc5d169537e366d7f26a853608325f",
+      "content": "C:\\Users\\shami\\.cache\\hyperframes\\history\\6e5fc349-4a34-4c84-995b-f015b4f936dc\\blobs\\21\\21f702001d533fa0ae096bdfff24b1060abc5d169537e366d7f26a853608325f"
+    }
+  },
+  "revisions": {},
+  "checks": {
+    "latest": {
+      "revision": null,
+      "id": "ded8665a-c674-401b-b03d-ec5383256e73"
+    },
+    "revisions": {},
+    "unversioned": [
+      {
+        "id": "ded8665a-c674-401b-b03d-ec5383256e73",
+        "scope": "project",
+        "report": "C:\\Users\\shami\\OneDrive\\Desktop\\Coding\\Full-Stack Projects\\Movie Review Website\\brag-output\\composition\\.hyperframes\\artifacts\\checks\\ded8665a-c674-401b-b03d-ec5383256e73.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 45000,
+            "cache": true,
+            "contrast": true,
+            "craft": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto",
+            "includeUnmounted": false
+          }
+        },
+        "createdAt": 1794191241528,
+        "contentHash": "72b41a2b9297a478e0e4c9cce21ca614a09415c4ce7487396fd3eec5650d856e",
+        "revision": null,
+        "inputFingerprint": "c6203f5780f49f3d792be28562faa1edb76ea777c392b3bc6d63f7471ed327bf",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "0be51cf1-1b8b-4afd-ad3e-844d566110d9",
+      "completedAt": 1794191308201,
+      "output": "C:\\Users\\shami\\OneDrive\\Desktop\\Coding\\Full-Stack Projects\\Movie Review Website\\brag-output\\brag.mp4",
+      "status": "completed",
+      "revision": null
+    },
+    "retainedRevisions": []
+  },
+  "pendingArtifactCleanup": []
+}
