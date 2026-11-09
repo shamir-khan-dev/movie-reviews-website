@@ -1,56 +1,48 @@
 <!DOCTYPE html>
-<!-- 'lang="en"' helps search engines and screen readers know this is English content -->
 <html lang="en">
 
-<!-- HEAD: The "Brain" of the page. Not visible to the user, but tells the browser how to render the page. -->
-
 <head>
-    <meta charset="UTF-8"> <!-- Uses standard characters (emojis, etc.) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes it look good on mobile phones -->
-    <title>CineRate | Premium Movie Reviews & Discovery</title>
-    <meta name="description" content="Discover popular movies, browse cinematic details, and read or write reviews on CineRate. A premium full-stack movie review web application.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineRate : The Golden Age Cinema Experience</title>
+    <meta name="description" content="Discover popular movies, browse cinematic details, and read or write reviews on CineRate. A bespoke full stack movie review web application.">
 
-    <!-- Google Fonts: Saira Condensed, EB Garamond, JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400&family=Saira+Condensed:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-    <!-- Link to our custom CSS file which controls the COLOR and LAYOUT -->
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 
-<!-- BODY: The "Body" of the page. This is everything the user actually SEES. -->
-
 <body>
-    <!-- Navigation Bar Container -->
+    <!-- Marquee Top Navigation Bar -->
     <div class="topnav">
-        <!-- The Logo/Home Link -->
-        <a class="active" href="#">CineRate</a>
+        <div class="marquee_brand">
+            <span class="marquee_bulb"></span>
+            <a class="active" href="#">CINERATE</a>
+            <span class="marquee_tag">35MM ARCHIVE</span>
+        </div>
 
-        <!-- Search Bar Container -->
         <div class="searchContainer">
-            <!-- 'role="search"' helps accessibility tools -->
             <form role="search" id="form">
-                <!-- 'input' is the text box. placeholder is the ghost text inside it. -->
-                <input type="search" id="query" name="q" placeholder="Search...">
+                <span class="search_icon">🔍</span>
+                <input type="search" id="query" name="q" placeholder="Search film archives...">
             </form>
         </div>
     </div>
 
-    <!-- Hero Header section to introduce CineRate -->
+    <!-- Hero Header with Cinema Marquee aesthetic -->
     <header class="hero-header">
-        <h1>Explore the Cinematic Universe</h1>
-        <p>Your ultimate destination to discover trending movies, read user impressions, and share your own reviews.</p>
+        <div class="marquee_ribbon">NOW SHOWING IN AUDITORIUM A</div>
+        <h1>THE CINEMATIC MARQUEE</h1>
+        <p>Explore silver screen classics and current releases, curated reviews, and film community ratings.</p>
     </header>
 
-    <!-- MAIN SECTION: The big container where we will pour all our movie cards -->
+    <!-- Main Movie Cards Container -->
     <main id="section">
-        <!-- We leave this empty because JavaScript (script.js) will build the HTML here automatically -->
     </main>
 
 </body>
 
-<!-- Link to our JavaScript. We put it at the end so the HTML loads first. -->
 <script src="script.js"></script>
-<!-- Trigger deploy -->
 </html>
